@@ -1,0 +1,20 @@
+{
+  "app": {
+    "name": "Dummy image generator"
+  },
+  "label": {
+    "extension": "Extension",
+    "filename": "File name"
+  },
+  "placeholder": {
+    "select_extension": "Select extension"
+  },
+  "button": {
+    "download": "Download",
+    "close": "Close"
+  },
+  "text": {
+    "licence": "Licence MIT",
+    "settings": "Settings"
+  }
+}
