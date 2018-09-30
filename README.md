@@ -1,4 +1,4 @@
-# image-generator
+# foo-imager
 
 ## Project setup
 ```
@@ -19,3 +19,6 @@ yarn run build
 ```
 yarn run lint
 ```
+# Foo Imager
+
+Generates dummy images with any size.
