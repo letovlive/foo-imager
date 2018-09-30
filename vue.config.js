@@ -7,7 +7,4 @@ module.exports = {
       enableInSFC: true
     }
   },
-  devServer: {
-    headers: { "Access-Control-Allow-Origin": "*" }
-  }
 }
