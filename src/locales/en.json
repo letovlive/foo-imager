@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Foo imager"
+    "name": "Dummy image generator"
   },
   "label": {
     "extension": "Extension",

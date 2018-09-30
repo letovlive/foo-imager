@@ -1,11 +1,45 @@
 <template>
-    <div id="app">
+    <div
+      id="app"
+      class="app"
+    >
         <el-row class="full-height">
             <el-col :xl="24">
-                <el-header>
-                    <h1>
-                        {{ $t('app.name') }}
-                    </h1>
+                <el-header
+                  height="80"
+                  class="app__header"
+                >
+                    <el-row>
+                        <el-col
+                          :xs="4"
+                          :sm="4"
+                          :md="4"
+                          :lg="4"
+                        >
+                            <img
+                              class="app__logo"
+                              src="./assets/logo.svg"
+                            >
+                        </el-col>
+                        <el-col
+                          :xs="0"
+                          :sm="16"
+                          :md="16"
+                          :lg="16"
+                        >
+                            <h1>
+                                {{ $t('app.name') }}
+                            </h1>
+                        </el-col>
+                        <el-col
+                          :xs="4"
+                          :sm="4"
+                          :md="4"
+                          :lg="4"
+                        >
+                            <github-link></github-link>
+                        </el-col>
+                    </el-row>
                 </el-header>
             </el-col>
             <el-col
@@ -89,133 +123,135 @@
 </template>
 
 <script>
-    import Sidebar from './components/Sidebar.vue';
-    import MainContainer from './components/MainContainer.vue';
-    import FooterContainer from './components/FooterContainer.vue';
-    import canvg from 'canvg';
-    import {saveAs} from 'file-saver/FileSaver';
-    import Vue from "vue";
+  import Sidebar from './components/Sidebar.vue';
+  import MainContainer from './components/MainContainer.vue';
+  import FooterContainer from './components/FooterContainer.vue';
+  import GithubLink from './components/GithubLink.vue';
+  import canvg from 'canvg';
+  import { saveAs } from 'file-saver/FileSaver';
+  import Vue from 'vue';
 
-    export default Vue.extend({
+  export default Vue.extend({
 
-        /**
-         * Name.
-         */
-        name: 'app',
+    /**
+     * Name.
+     */
+    name: 'app',
 
-        /**
-         * Reactive properties.
-         */
-        data() {
-            return {
-                fileName: '',
-                userFileName: '',
-                svg: {},
-                text: '',
-                imageType: 'png',
-                image: {
-                    height: 200,
-                    width: 200,
-                    backgroundColor: 'rgba(19, 206, 102, 0.8)',
-                    fontColor: 'rgba(19, 206, 102, 0.8)'
-                }
-            };
-        },
-
-        /**
-         * Components
-         */
-        components: {
-            MainContainer,
-            Sidebar,
-            FooterContainer
-        },
-
-        /**
-         * Mounted hook.
-         */
-        mounted() {
-            this.setFileName();
-        },
-
-        /**
-         * Computed properties.
-         */
-        computed: {
-
-            /**
-             * Image types
-             */
-            imageTypes() {
-                return [
-                    {label: 'PNG', value: 'png'},
-                    {label: 'JPG', value: 'jpg'},
-                    {label: 'GIF', value: 'gif'},
-                    {label: 'SVG', value: 'svg'}
-                ];
-            },
-        },
-
-        /**
-         * Methods.
-         */
-        methods: {
-            /**
-             * Save image.
-             */
-            save() {
-                saveAs(this.imageType === 'svg' ? this.saveSvg() : this.saveImage(),
-                    `${this.userFileName || this.fileName}_${Date.now()}.${this.imageType}`);
-            },
-
-            /**
-             * Set file name.
-             */
-            setFileName() {
-                this.fileName = `${this.image.width}x${this.image.height}`;
-            },
-
-            saveImage() {
-                const canvas = document.createElement('canvas');
-                canvas.width = this.image.width;
-                canvas.height = this.image.height;
-
-                canvg(canvas, this.svg.parentNode.innerHTML.trim());
-                const data = atob(canvas.toDataURL(`image/${this.imageType}`)
-                    .substring(`data:image/${this.imageType};base64,`.length));
-                const asArray = new Uint8Array(data.length);
-
-                for (let i = 0, len = data.length; i < len; ++i) {
-                    asArray[i] = data.charCodeAt(i);
-                }
-
-                return new Blob([asArray.buffer], {type: `image/${this.imageType}`});
-            },
-
-            saveSvg() {
-                return new Blob(['<?xml version="1.0" standalone="no"?>\r\n', this.svg.outerHTML],
-                    {type: 'image/svg+xml;charset=utf-8'});
-            },
-
-        },
-
-        /**
-         * Watchers.
-         */
-        watch: {
-            /**
-             * Image height watcher.
-             */
-            'image.height'() {
-                this.setFileName();
-            },
-
-            /**
-             * Image width watcher.
-             */
-            'image.width'() {
-                this.setFileName();
-            },
+    /**
+     * Reactive properties.
+     */
+    data () {
+      return {
+        fileName: '',
+        userFileName: '',
+        svg: {},
+        text: '',
+        imageType: 'png',
+        image: {
+          height: 200,
+          width: 200,
+          backgroundColor: 'rgba(19, 206, 102, 0.8)',
+          fontColor: 'rgba(19, 206, 102, 0.8)'
         }
-    });
+      };
+    },
+
+    /**
+     * Components
+     */
+    components: {
+      MainContainer,
+      Sidebar,
+      FooterContainer,
+      GithubLink
+    },
+
+    /**
+     * Mounted hook.
+     */
+    mounted () {
+      this.setFileName();
+    },
+
+    /**
+     * Computed properties.
+     */
+    computed: {
+
+      /**
+       * Image types
+       */
+      imageTypes () {
+        return [
+          { label: 'PNG', value: 'png' },
+          { label: 'JPG', value: 'jpg' },
+          { label: 'GIF', value: 'gif' },
+          { label: 'SVG', value: 'svg' }
+        ];
+      },
+    },
+
+    /**
+     * Methods.
+     */
+    methods: {
+      /**
+       * Save image.
+       */
+      save () {
+        saveAs(this.imageType === 'svg' ? this.saveSvg() : this.saveImage(),
+          `${this.userFileName || this.fileName}_${Date.now()}.${this.imageType}`);
+      },
+
+      /**
+       * Set file name.
+       */
+      setFileName () {
+        this.fileName = `${this.image.width}x${this.image.height}`;
+      },
+
+      saveImage () {
+        const canvas = document.createElement('canvas');
+        canvas.width = this.image.width;
+        canvas.height = this.image.height;
+
+        canvg(canvas, this.svg.parentNode.innerHTML.trim());
+        const data = atob(canvas.toDataURL(`image/${this.imageType}`)
+          .substring(`data:image/${this.imageType};base64,`.length));
+        const asArray = new Uint8Array(data.length);
+
+        for (let i = 0, len = data.length; i < len; ++i) {
+          asArray[i] = data.charCodeAt(i);
+        }
+
+        return new Blob([asArray.buffer], { type: `image/${this.imageType}` });
+      },
+
+      saveSvg () {
+        return new Blob(['<?xml version="1.0" standalone="no"?>\r\n', this.svg.outerHTML],
+          { type: 'image/svg+xml;charset=utf-8' });
+      },
+
+    },
+
+    /**
+     * Watchers.
+     */
+    watch: {
+      /**
+       * Image height watcher.
+       */
+      'image.height' () {
+        this.setFileName();
+      },
+
+      /**
+       * Image width watcher.
+       */
+      'image.width' () {
+        this.setFileName();
+      },
+    }
+  });
 </script>
