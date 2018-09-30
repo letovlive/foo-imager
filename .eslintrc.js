@@ -25,7 +25,7 @@ module.exports = {
     'comma-dangle': 0,
     'semi': 0,
   },
-  "globals": {
-    "google": true
+  'globals': {
+    'google': true
   }
 };
