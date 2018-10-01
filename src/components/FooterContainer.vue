@@ -1,7 +1,11 @@
 <template>
     <div>
         <el-footer>
-            <a href="mailto:alex.petrenko.inbox@gmail.com">© Alexey Petrenko</a> |
+            <a
+              :href="mailto"
+              @mouseover="showEmail"
+              @mouseout="hideEmail"
+            >© Alexey Petrenko</a> |
             <a href="#" @click.prevent="dialogVisible = true">{{ $t('text.licence')}}</a>
         </el-footer>
         <el-dialog
@@ -35,41 +39,14 @@
     name: 'FooterContainer',
 
     /**
-     * Mixins.
-     */
-    mixins: [],
-
-    /**
-     * Props.
-     */
-    props: {},
-
-    /**
      * Reactive properties.
      * @returns {{}}
      */
     data () {
       return {
         dialogVisible: false,
+        visibleEmail: false
       };
-    },
-
-    /**
-     * Created hook.
-     */
-    created () {
-    },
-
-    /**
-     * Mounted hook.
-     */
-    mounted () {
-    },
-
-    /**
-     * Destroyed hook.
-     */
-    destroyed () {
     },
 
     /**
@@ -82,16 +59,35 @@
     /**
      * Computed properties.
      */
-    computed: {},
+    computed: {
+
+      mailto () {
+        const contact = 'YWxleC5wZXRyZW5rby5pbmJveEBnbWFpbC5jb20=';
+        const subject = 'Rm9vIGltYWdlcg==';
+
+        return this.visibleEmail ? `mailto:${atob(contact)}?subject=${atob(subject)}` : '#';
+      }
+    },
 
     /**
      * Methods.
      */
-    methods: {},
+    methods: {
 
-    /**
-     * Watchers.
-     */
-    watch: {}
+      /**
+       * Show email.
+       */
+      showEmail () {
+        console.log('111');
+        this.visibleEmail = true;
+      },
+
+      /**
+       * Hide email.
+       */
+      hideEmail () {
+        this.visibleEmail = false;
+      }
+    },
   };
 </script>
