@@ -36,13 +36,10 @@ module.exports = {
   'globals': {
     'window': true,
     'document': true,
-    'babel-jest': {
-      'babelrcFile': '<rootDir>/src/tests/.babelrc'
-    }
   },
-  // 'collectCoverage': true,
-  // 'collectCoverageFrom': [
-  //   '**/*.{js,vue}',
-  //   '!**/node_modules/**'
-  // ]
+  'collectCoverage': true,
+  'collectCoverageFrom': [
+    '**/*.{js,vue}',
+    '!**/node_modules/**'
+  ]
 };
