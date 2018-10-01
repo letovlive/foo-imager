@@ -1,4 +1,13 @@
-# foo-imager
+# Foo imager
+
+Foo imager is an MIT-licensed open source project. It allows to generate dummy images for testing.
+
+Available formats that can be generated:
+
+png
+gif
+jpg
+svg
 
 ## Project setup
 ```
