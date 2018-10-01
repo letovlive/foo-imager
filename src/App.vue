@@ -136,7 +136,7 @@
     /**
      * Name.
      */
-    name: 'app',
+    name: 'App',
 
     /**
      * Reactive properties.
