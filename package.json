@@ -1,11 +1,12 @@
 {
-  "name": "image-generator",
+  "name": "foo-imager",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "eslint --ext .js,.vue src",
+    "test": "BABEL_ENV=test node_modules/.bin/jest --no-cache --config jest.config.js"
   },
   "dependencies": {
     "element-ui": "^2.4.5",
@@ -19,12 +20,21 @@
     "@types/webpack-env": "^1.13.6",
     "@vue/cli-plugin-babel": "^3.0.3",
     "@vue/cli-plugin-eslint": "^3.0.3",
+    "@vue/cli-plugin-unit-jest": "^3.0.4",
     "@vue/cli-service": "^3.0.3",
     "@vue/eslint-config-typescript": "^3.0.3",
+    "@vue/test-utils": "^1.0.0-beta.25",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
     "canvg": "^1.5.3",
+    "eslint-config-vue": "^2.0.2",
+    "eslint-plugin-html": "^4.0.6",
     "file-saver": "^1.3.8",
     "node-sass": "^4.9.2",
     "sass-loader": "^7.0.3",
+    "typescript": "^3.1.1",
     "vue-cli-plugin-element": "^1.0.0",
     "vue-cli-plugin-i18n": "^0.5.0",
     "vue-template-compiler": "^2.5.17"
@@ -39,8 +49,7 @@
       "eslint:recommended"
     ],
     "rules": {},
-    "parserOptions": {
-    }
+    "parserOptions": {}
   },
   "postcss": {
     "plugins": {

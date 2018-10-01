@@ -1,0 +1,41 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build site:
+  image: node:8
+  stage: build
+  only:
+    - branches
+    - tags
+  script:
+    - yarn install --progress=false
+    - yarn lint
+    - yarn build
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist
+
+unit test:
+  image: node:8
+  stage: test
+  only:
+      - branches
+  script:
+    - yarn install --progress=false
+    - yarn test
+
+deploy:
+  image: alpine
+  stage: deploy
+  only:
+    - tags
+  script:
+    - apk add --no-cache rsync openssh
+    - mkdir -p ~/.ssh
+    - echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_dsa
+    - chmod 600 ~/.ssh/id_dsa
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
+    - rsync -rav -e "ssh -p 2222" --delete "/builds/${GITLAB_USER_LOGIN}/${CI_PROJECT_NAME}/dist/" "${DEPLOY_USER}@${TARGET_SERVER_USER_HOST}:${TARGET_DESTINATION}"
