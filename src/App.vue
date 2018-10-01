@@ -5,42 +5,7 @@
     >
         <el-row class="full-height">
             <el-col :xl="24">
-                <el-header
-                  height="80"
-                  class="app__header"
-                >
-                    <el-row>
-                        <el-col
-                          :xs="4"
-                          :sm="4"
-                          :md="4"
-                          :lg="4"
-                        >
-                            <img
-                              class="app__logo"
-                              src="./assets/logo.svg"
-                            >
-                        </el-col>
-                        <el-col
-                          :xs="0"
-                          :sm="16"
-                          :md="16"
-                          :lg="16"
-                        >
-                            <h1>
-                                {{ $t('app.name') }}
-                            </h1>
-                        </el-col>
-                        <el-col
-                          :xs="4"
-                          :sm="4"
-                          :md="4"
-                          :lg="4"
-                        >
-                            <github-link></github-link>
-                        </el-col>
-                    </el-row>
-                </el-header>
+                <header-container></header-container>
             </el-col>
             <el-col
               :xs="24"
@@ -126,7 +91,7 @@
   import Sidebar from './components/Sidebar.vue';
   import MainContainer from './components/MainContainer.vue';
   import FooterContainer from './components/FooterContainer.vue';
-  import GithubLink from './components/GithubLink.vue';
+  import HeaderContainer from './components/HeaderContainer.vue';
   import canvg from 'canvg';
   import { saveAs } from 'file-saver/FileSaver';
   import Vue from 'vue';
@@ -164,7 +129,7 @@
       MainContainer,
       Sidebar,
       FooterContainer,
-      GithubLink
+      HeaderContainer
     },
 
     /**
