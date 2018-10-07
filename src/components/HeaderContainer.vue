@@ -13,6 +13,7 @@
                 <img
                   class="app__logo"
                   src="./../assets/logo.svg"
+                  alt="logo"
                 >
             </el-col>
             <el-col
@@ -33,6 +34,7 @@
             >
                 <github-link
                   url="https://github.com/letovlive/foo-imager"
+                  target="_blank"
                 >
                 </github-link>
             </el-col>
