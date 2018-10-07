@@ -10,6 +10,7 @@
               size="80"
             >
                 <el-input-number
+                  name="width"
                   v-model="image.width"
                   @change="handleChange"
                   :min="1"
@@ -19,6 +20,7 @@
             </el-form-item>
             <el-form-item label="Height">
                 <el-input-number
+                  name="height"
                   v-model="image.height"
                   @change="handleChange"
                   :min="1"
@@ -32,6 +34,7 @@
                   label="Background"
                 >
                     <el-color-picker
+                      name="background"
                       v-model="image.backgroundColor"
                       show-alpha
                     >
@@ -42,6 +45,7 @@
                   label="Font color"
                 >
                     <el-color-picker
+                      name="fontColor"
                       v-model="image.fontColor"
                     >
                     </el-color-picker>

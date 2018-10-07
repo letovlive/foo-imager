@@ -27,6 +27,7 @@
                           :label="$t('label.filename')"
                         >
                             <el-input
+                              name="fileName"
                               :placeholder="fileName"
                               v-model="userFileName"
                             >
@@ -36,6 +37,7 @@
                           :label="$t('label.extension')"
                         >
                             <el-select
+                              name="imageType"
                               v-model="imageType"
                               :placeholder="$t('placeholder.select_extension')"
                             >
@@ -50,6 +52,7 @@
                         </el-form-item>
                         <div class="el-form-submit-wrapper">
                             <el-button
+                              name="download"
                               @click.prevent="save"
                               slot="buttons"
                               type="primary"

@@ -4,7 +4,6 @@ module.exports = {
   ],
   'moduleFileExtensions': [
     'js',
-    'json',
     'vue'
   ],
   'transform': {
@@ -21,7 +20,6 @@ module.exports = {
   ],
   'moduleDirectories': [
     'node_modules',
-    'src'
   ],
   'moduleNameMapper': {
     // support the same @ -> src alias mapping in source code
@@ -37,9 +35,15 @@ module.exports = {
     'window': true,
     'document': true,
   },
+  'coverageReporters': [
+    'text',
+    'html'
+  ],
+  'coverageDirectory': '<rootDir>/reports/coverage',
   'collectCoverage': true,
   'collectCoverageFrom': [
-    '**/*.{js,vue}',
+    'src/components/**/*.js',
+    'src/components/**/*.vue',
     '!**/node_modules/**'
   ]
 };
