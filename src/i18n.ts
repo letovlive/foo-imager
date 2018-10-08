@@ -3,10 +3,14 @@ import VueI18n from 'vue-i18n';
 
 Vue.use(VueI18n);
 
+/**
+ * Load translations from json.
+ * @return {any}
+ */
 function loadLocaleMessages () {
-  const locales = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i);
-  const messages = {};
-  locales.keys().forEach(key => {
+  const locales: any = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i);
+  const messages: any = {};
+  locales.keys().forEach((key: string) => {
     const matched = key.match(/([a-z0-9]+)\./i);
     if (matched && matched.length > 1) {
       const locale = (matched)[1];

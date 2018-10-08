@@ -1,127 +1,102 @@
 <template>
-    <div class="main">
-        <div class="main-container">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              id="imageSvg"
-              :width="image.width"
-              :height="image.height"
-            >
-                <rect
-                  :width="image.width"
-                  :height="image.height"
-                  :fill="image.backgroundColor"
-                  x="0"
-                  y="0"
-                >
-                </rect>
-                <text
-                  :x="image.width / 2"
-                  :y="(image.height + (isVertical ? image.height * 0.1 : 0)) / 2"
-                  text-anchor="middle"
-                  :fill="image.fontColor"
-                  alignment-baseline="central"
-                  :style="getFontSettings()"
-                >
-                    {{ imageText }}
-                </text>
-            </svg>
-        </div>
+  <div class="main">
+    <div class="main-container">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        id="imageSvg"
+        :width="image.width"
+        :height="image.height"
+      >
+        <rect
+          :width="image.width"
+          :height="image.height"
+          :fill="image.backgroundColor"
+          x="0"
+          y="0"
+        >
+        </rect>
+        <text
+          :x="image.width / 2"
+          :y="(image.height + (isVertical ? image.height * 0.1 : 0)) / 2"
+          text-anchor="middle"
+          :fill="image.fontColor"
+          alignment-baseline="central"
+          :style="getFontSettings()"
+        >
+          {{ imageText }}
+        </text>
+      </svg>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
-  export default {
-    /**
-     * Name.
-     */
-    name: 'MainContainer',
+  import { Vue, Component, Prop } from 'vue-property-decorator';
+  import Image from './../interfaces/Image';
+
+  @Component
+  export default class MainContainer extends Vue {
 
     /**
-     * Props.
+     * Image settings.
      */
-    props: {
-      image: {
-        type: Object,
-        default () {
-          return {
-            height: 0,
-            width: 0,
-            backgroundColor: '#fff',
-            fontColor: '#fff'
-          };
-        }
-      },
-      text: {
-        type: String,
-        default: ''
+    @Prop({
+      default: {
+        height: 0,
+        width: 0,
+        backgroundColor: '#fff',
+        fontColor: '#fff'
       }
-    },
+    }) image: Image;
 
     /**
-     * Reactive properties.
-     * @returns {{}}
+     * Text on image.
      */
-    data () {
-      return {};
-    },
+    @Prop({ default: '' }) text: string;
 
     /**
      * Mounted hook.
      */
-    mounted () {
+    mounted (): void {
       this.$nextTick(() => {
         this.$emit('update:svg', this.$el.querySelector('#imageSvg'));
-      })
-    },
+      });
+    }
 
     /**
-     * Computed properties.
+     * Checks if image is vertical.
+     * @return boolean
      */
-    computed: {
-
-      /**
-       * Checks if image is vertical.
-       */
-      isVertical () {
-        return this.image.height / this.image.width >= 2;
-      },
-
-      /**
-       * Compute font size
-       */
-      fontSize () {
-        return this.image[this.isVertical ? 'height' : 'width'] / 5;
-      },
-
-      /**
-       * Image text.
-       */
-      imageText () {
-        return this.text || `${this.image.width}x${this.image.height}`;
-      }
-    },
+    get isVertical (): boolean {
+      return this.image.height / this.image.width >= 2;
+    }
 
     /**
-     * Methods.
+     * Compute font size
+     * @return number
      */
-    methods: {
-      /**
-       * Get font CSS.
-       * @return {string}
-       */
-      getFontSettings () {
-        return {
-          fontSize: `${this.fontSize}px`,
-          writingMode: this.isVertical ? 'vertical-rl' : 'horizontal-tb',
-          textOrientation: 'mixed',
-        };
-      },
-    },
+    get fontSize (): number {
+      return this.image[this.isVertical ? 'height' : 'width'] / 5;
+    }
 
     /**
-     * Watchers.
+     * Image text.
+     * @return text
      */
-    watch: {}
+    get imageText (): string {
+      return this.text || `${this.image.width}x${this.image.height}`;
+    }
+
+    /**
+     * Get font CSS.
+     * @return {string}
+     */
+    getFontSettings (): Object {
+      return {
+        fontSize: `${this.fontSize}px`,
+        writingMode: this.isVertical ? 'vertical-rl' : 'horizontal-tb',
+        textOrientation: 'mixed',
+      };
+    }
   };
 </script>
