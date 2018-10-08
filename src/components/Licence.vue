@@ -24,7 +24,6 @@
 
   @Component
   export default class Licence extends Vue {
-
     /**
      * Returns current year.
      * @return {number}

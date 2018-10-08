@@ -36,7 +36,6 @@
 
   @Component
   export default class MainContainer extends Vue {
-
     /**
      * Image settings.
      */
