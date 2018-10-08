@@ -23,7 +23,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'vue/jsx-uses-vars': 2,
     'comma-dangle': 0,
-    'semi': 0,
+    'semi': [2, 'always'],
   },
   'globals': {
     'google': true
