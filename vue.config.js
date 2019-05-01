@@ -1,3 +1,5 @@
+const SitemapPlugin = require('./src/webpack/SitemapPlugin');
+
 module.exports = {
   pluginOptions: {
     i18n: {
@@ -7,4 +9,9 @@ module.exports = {
       enableInSFC: true
     }
   },
+  configureWebpack: {
+    plugins: [
+      SitemapPlugin
+    ]
+  }
 };
