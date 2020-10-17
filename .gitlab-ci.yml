@@ -17,6 +17,9 @@ build site:
     expire_in: 1 week
     paths:
       - dist
+      - infrastructure
+      - .env
+      - docker-compose.yaml
 
 unit test:
   image: node:8
@@ -38,4 +41,4 @@ deploy:
     - echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_dsa
     - chmod 600 ~/.ssh/id_dsa
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
-    - rsync -rav -e "ssh -p 2222" --delete "/builds/${GITLAB_USER_LOGIN}/${CI_PROJECT_NAME}/dist/" "${DEPLOY_USER}@${TARGET_SERVER_USER_HOST}:${TARGET_DESTINATION}"
+    - rsync -rav -e "ssh -p ${SSH_PORT}" --delete "/builds/${GITLAB_USER_LOGIN}/${CI_PROJECT_NAME}/dist/" "${DEPLOY_USER}@${TARGET_SERVER_USER_HOST}:${TARGET_DESTINATION}"
