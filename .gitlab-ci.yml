@@ -4,7 +4,7 @@ stages:
   - deploy
 
 build site:
-  image: node:8
+  image: node:10
   stage: build
   only:
     - branches
@@ -22,7 +22,7 @@ build site:
       - docker-compose.yaml
 
 unit test:
-  image: node:8
+  image: node:10
   stage: test
   only:
       - branches
