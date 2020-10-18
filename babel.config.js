@@ -13,7 +13,7 @@ const testConfig = {
 
 const buildConfig = {
   presets: [
-    '@vue/app'
+    '@vue/cli-plugin-babel/preset'
   ]
 };
 
